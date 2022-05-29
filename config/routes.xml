@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<filteringDatabases>
+  <filteringDatabase id="switch1">
+    <static>
+      <forward>
+        <individualAddress port="0" macAddress="00-0c-29-ad-5c-75"/>
+        <multicastAddress ports="0" macAddress="01-00-5E-00-00-01"/>
+        <individualAddress port="0" macAddress="00:0c:29:e1:8c:3d"/>
+      </forward>
+    </static>
+  </filteringDatabase>
+  <filteringDatabase id="switch2">
+    <static>
+      <forward>
+        <individualAddress port="2" macAddress="00-0c-29-ad-5c-75"/>
+        <multicastAddress ports="2" macAddress="01-00-5E-00-00-01"/>
+        <individualAddress port="1" macAddress="00-00-00-00-00-0C"/>
+      </forward>
+    </static>
+  </filteringDatabase>
+  <filteringDatabase id="switch3">
+    <static>
+      <forward>
+        <individualAddress port="2" macAddress="00-00-00-00-00-12"/>
+        <multicastAddress ports="2" macAddress="01-00-00-00-00-01"/>
+        <individualAddress port="2" macAddress="00-00-00-00-00-0C"/>
+      </forward>
+    </static>
+  </filteringDatabase>
+</filteringDatabases>

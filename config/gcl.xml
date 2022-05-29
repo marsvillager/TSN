@@ -1,0 +1,437 @@
+<?xml version="1.0" ?>
+<schedule timeUnit="us">
+	<!-- us -->
+	<cycle>400000</cycle>
+	
+	<switch name="switch1">
+		<port id="0">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="1">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="2">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000011</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+	</switch>
+	
+	<switch name="switch2">
+		<port id="0">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="1">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="2">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="3">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+	</switch>
+	
+	<switch name="switch3">
+		<port id="0">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="1">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="2">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="3">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+	</switch>
+	
+	<switch name="switch4">
+		<port id="0">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="1">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+		<port id="2">
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>1</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>2</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>00000001</bitvector>
+				<uniqueID>3</uniqueID>
+				<phase>0</phase>
+			</entry>
+			<entry>
+				<!-- us -->
+				<length>100000</length>
+				<bitvector>11111110</bitvector>
+				<uniqueID>0</uniqueID>
+				<phase>0</phase>
+			</entry>
+		</port>
+	</switch>
+</schedule>
