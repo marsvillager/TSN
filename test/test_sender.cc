@@ -13,6 +13,7 @@
 #include "../src/utils/log/Log.h"
 
 using namespace faker_tsn;
+using namespace std;
 
 static void TestSend() {
     union ethframe {
@@ -68,9 +69,9 @@ static void TestSend() {
         // memset(&tci, 0x00, sizeof(tci));
         // tci.pcp = 7;
         // tci.vid = 1;
-        // INFO("pcp = " + std::to_string(tci.pcp));
-        // INFO("dei = " + std::to_string(tci.dei));
-        // INFO("vid = " + std::to_string(tci.vid));
+        // INFO("pcp = " + to_string(tci.pcp));
+        // INFO("dei = " + to_string(tci.dei));
+        // INFO("vid = " + to_string(tci.vid));
 
         // __be16 tci = TCI[i%8]; // 一轮优先级测试
         __be16 tci = TCI[i % 4];  // 一轮优先级测试
@@ -95,12 +96,12 @@ static void TestSend() {
         const char* data = "hello world\n";
         unsigned int frame_len = strlen(data) + ETH_HLEN + 4 + 6;
         memset(&frame, 0x00, sizeof(tsn_frame));
-        // INFO("TSN frame length = " + std::to_string(sizeof(frame)));
+        // INFO("TSN frame length = " + to_string(sizeof(frame)));
         memcpy(&frame.filed.header.eth_hdr, &eth_hdr, sizeof(eth_hdr));
         memcpy(&frame.filed.header.vlan_tag, &vlan_tag, sizeof(vlan_tag));
         memcpy(&frame.filed.header.r_tag, &rtag, sizeof(rtag));
         memcpy(frame.filed.data, data, strlen(data));
-        // INFO("data = " + std::string(data) + "\n");
+        // INFO("data = " + string(data) + "\n");
 
         /* fill in frame */
         // union ethframe frame;

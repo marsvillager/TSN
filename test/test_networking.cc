@@ -7,6 +7,7 @@
 #include "../src/utils/ConvertUtils.h"
 
 using namespace faker_tsn;
+using namespace std;
 
 void port_status(unsigned int flags) {
     if (flags & IFF_UP) { /* Interface is up. */
@@ -54,7 +55,7 @@ static void TestGetMulticastMacAddress() {
     if (ioctl(sockfd, SIOCGIFADDR, &buffer) < 0) { /* get PA addres */
         printf("Error: could not get IP address\n");
     }
-    std::cerr << "\nIP address: " << inet_ntoa(((struct sockaddr_in*)&(buffer.ifr_ifru.ifru_addr))->sin_addr) << '\n';
+    cerr << "\nIP address: " << inet_ntoa(((struct sockaddr_in*)&(buffer.ifr_ifru.ifru_addr))->sin_addr) << '\n';
 
     struct ifconf ifc;
     struct ifreq buf[32];
@@ -75,7 +76,7 @@ static void TestGetMulticastMacAddress() {
         if (ret)
             continue;
 
-        INFO("interface index is: " + std::to_string(buf[num].ifr_ifindex));
+        INFO("interface index is: " + to_string(buf[num].ifr_ifindex));
         // printf("interface index is: %d\n", buf[num].ifr_ifru.ifru_ivalue);
 
         printf("flag is: %d\n", buf[num].ifr_flags);
@@ -105,10 +106,10 @@ static void TestGetMulticastMacAddress() {
         throw IndexNotFound();
     }
 
-    INFO("interface index is: " + std::to_string(buffer.ifr_ifindex));
+    INFO("interface index is: " + to_string(buffer.ifr_ifindex));
     printf("net device: %s\n", buffer.ifr_ifrn.ifrn_name);
 
-    std::cerr << "IP address: " << inet_ntoa(((struct sockaddr_in*)&(buffer.ifr_ifru.ifru_addr))->sin_addr) << '\n';
+    cerr << "IP address: " << inet_ntoa(((struct sockaddr_in*)&(buffer.ifr_ifru.ifru_addr))->sin_addr) << '\n';
 
     memcpy(macaddr, buffer.ifr_hwaddr.sa_data, ETH_ALEN);
     printf("MAC address");
@@ -126,16 +127,16 @@ static void TestGetMacAddress() {
         for (int i = 0; i < ETH_ALEN; i++) {
             printf("%d ", rawMac[i]);
         }
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
+    } catch (const exception& e) {
+        cerr << e.what() << '\n';
     }
 }
 
 static void TestGetIndex() {
     try {
         int index = LinkLayerInterface::getIndex("ens33");
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
+    } catch (const exception& e) {
+        cerr << e.what() << '\n';
     }
 }
 
@@ -143,8 +144,8 @@ static void TestFindInterface() {
     try {
         LinkLayerInterface* interface = LinkLayerInterface::findInterface("ens33");
         INFO(interface->toString());
-    } catch (const std::exception& e) {
-        std::cerr << e.what() << '\n';
+    } catch (const exception& e) {
+        cerr << e.what() << '\n';
     }
 }
 
@@ -162,7 +163,7 @@ static void TestIfEther() {
 
     // test Ethernet header
     struct ethhdr eth_hdr;
-    INFO("Ethernet header length = " + std::to_string(sizeof(eth_hdr)));
+    INFO("Ethernet header length = " + to_string(sizeof(eth_hdr)));
     memset(&eth_hdr, 0x00, sizeof(eth_hdr));
     memcpy(&eth_hdr.h_source, src, ETH_ALEN);  // set src mac
     eth_hdr.h_proto = htons(ETH_P_8021Q);      // set IEEE 802.1Q protocol
@@ -175,13 +176,13 @@ static void TestIfEther() {
     INFO("\nprotocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_proto), 2) + "\n");
 
     struct vlan_tci tci;
-    INFO("TCI length = " + std::to_string(sizeof(tci)));
+    INFO("TCI length = " + to_string(sizeof(tci)));
     memset(&tci, 0x00, sizeof(tci));
     tci.pcp = 1;
     tci.vid = 1;
-    INFO("pcp = " + std::to_string(tci.pcp));  // 001
-    INFO("dei = " + std::to_string(tci.dei));  // 0
-    INFO("vid = " + std::to_string(tci.vid));  // 000000000001
+    INFO("pcp = " + to_string(tci.pcp));  // 001
+    INFO("dei = " + to_string(tci.dei));  // 0
+    INFO("vid = " + to_string(tci.vid));  // 000000000001
     // N    0x2001 : 0010 0000 , 0000 0001
     // H    0x0120 : 0000 0001 , 0010 0000
     INFO("TCI = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&tci), 2) + "\n");
@@ -192,13 +193,13 @@ static void TestIfEther() {
     INFO("h_TCI = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&__tci), 2) + "\n");
 
     VlanTCI vlanTCI = VlanTCI::parse(_tci);
-    INFO("VlanTCI.pcp = " + std::to_string(vlanTCI.pcp));
-    INFO("VlanTCI.dei = " + std::to_string(vlanTCI.dei));
-    INFO("VlanTCI.vid = " + std::to_string(vlanTCI.vid));
+    INFO("VlanTCI.pcp = " + to_string(vlanTCI.pcp));
+    INFO("VlanTCI.dei = " + to_string(vlanTCI.dei));
+    INFO("VlanTCI.vid = " + to_string(vlanTCI.vid));
 
     // test VLAN tag
     struct vlan_hdr vlan_tag;
-    INFO("VLAN tag length = " + std::to_string(sizeof(vlan_tag)));
+    INFO("VLAN tag length = " + to_string(sizeof(vlan_tag)));
     memset(&vlan_tag, 0x00, sizeof(vlan_tag));
     memcpy(&vlan_tag.h_vlan_TCI, &_tci, sizeof(_tci));        // set TCI
     vlan_tag.h_vlan_encapsulated_proto = htons(ETH_P_8021Q);  // set IEEE 1722 protocol
@@ -207,7 +208,7 @@ static void TestIfEther() {
 
     // test R-tag
     struct rtag_hdr rtag;
-    INFO("R-tag length = " + std::to_string(sizeof(rtag)));
+    INFO("R-tag length = " + to_string(sizeof(rtag)));
     memset(&rtag, 0x00, sizeof(rtag));
     rtag.h_rtag_seq_num = htons(1);  // set
     rtag.h_rtag_encapsulated_proto = htons(ETH_P_ALL);
@@ -220,7 +221,7 @@ static void TestIfEther() {
     char* data = "hello world\n";
     INFO("raw data = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(data), 13));
     memset(&frame, 0x00, sizeof(tsn_frame));
-    INFO("TSN frame length = " + std::to_string(sizeof(frame)));
+    INFO("TSN frame length = " + to_string(sizeof(frame)));
     memcpy(&frame.filed.header.eth_hdr, &eth_hdr, sizeof(eth_hdr));     // eth_hdr
     memcpy(&frame.filed.header.vlan_tag, &vlan_tag, sizeof(vlan_tag));  // vlan tag
     memcpy(&frame.filed.header.r_tag, &rtag, sizeof(rtag));             // r_tag
@@ -247,8 +248,8 @@ static void TestIfEther() {
 static void TestMacTable() {
     ConfigSetting& cs = ConfigSetting::getInstance();
     /* load config file */
-    std::string filename = cs.get<std::string>("routesDir");
-    std::cout << filename << std::endl;
+    string filename = cs.get<string>("routesDir");
+    cout << filename << endl;
     MacTable::loadRouteXML(filename);
     // MacTable::loadRouteXML("/home/reptile/文档/TSN/config/routes.xml");
     INFO("\n" + MacTable::toString());

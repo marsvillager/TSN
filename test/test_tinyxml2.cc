@@ -5,6 +5,7 @@
 #include <sstream>
 
 using namespace faker_tsn;
+using namespace std;
 using namespace tinyxml2;
 
 static void TestTinyXML2_Read() {
@@ -16,7 +17,7 @@ static void TestTinyXML2_Read() {
     while (surface) {
         const XMLAttribute* surfaceAttr = surface->FirstAttribute();
         while (surfaceAttr) {
-            std::stringstream ss;
+            stringstream ss;
             ss << "Name: " << surfaceAttr->Name();
             ss << " | ";
             ss << "Value: " << surfaceAttr->Value();
@@ -25,7 +26,7 @@ static void TestTinyXML2_Read() {
         }
         XMLElement* surfaceChlid = surface->FirstChildElement();
         while (surfaceChlid) {
-            std::stringstream ss;
+            stringstream ss;
             ss << "Name: " << surfaceChlid->Name();
             ss << " | ";
             ss << "Value: " << surfaceChlid->GetText();

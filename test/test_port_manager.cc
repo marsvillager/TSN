@@ -5,6 +5,7 @@
 #include <iterator>
 
 using namespace faker_tsn;
+using namespace std;
 
 static void TestPortManager() {
     PortManager portManager;
@@ -12,16 +13,16 @@ static void TestPortManager() {
     auto deviceNames = portManager.getAllDeviceName();
     portManager.createPortFromDeviceNameList();
     auto port = portManager.getPort(0);
-    INFO(std::to_string(port->getDeviceID()));
+    INFO(to_string(port->getDeviceID()));
     INFO(port->getDeviceName());
-    // std::cout << std::endl;
+    // cout << endl;
     // port->sendTest();
 }
 
 static void TestPort() {
     const char* name = "ens33";
-    std::shared_ptr<IPort> port = std::make_shared<DataPort>(name);
-    std::shared_ptr<IPortState> creationState = std::make_shared<CreationPortState>();
+    shared_ptr<IPort> port = make_shared<DataPort>(name);
+    shared_ptr<IPortState> creationState = make_shared<CreationPortState>();
     creationState->doAction(port);
     port->sendTest();
 }
@@ -49,7 +50,7 @@ static void TestPCAP() {
         fprintf(stderr, "Couldn't find default device: %s\n", errbuf);
         exit(EXIT_FAILURE);
     }
-    INFO("Device: " + std::string(dev));
+    INFO("Device: " + string(dev));
 
     /* open the session on non-promiscouos mode */
     pcap_t* handle;

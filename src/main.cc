@@ -9,8 +9,9 @@
 #include <faker_tsn.h>
 
 using namespace faker_tsn;
+using namespace std;
 
 int main(int argc, char** argv) {
-    std::cout << "tsn_app";
+    cout << "tsn_app";
     return 0;
 }

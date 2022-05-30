@@ -4,6 +4,8 @@
 #include <string>
 #include <unordered_map>
 
+using namespace std;
+
 class ReflectObject {
   public:
     virtual ~ReflectObject() = default;
@@ -20,21 +22,21 @@ class ObjectFactory {
 
 class Reflector {
   private:
-    std::unordered_map<std::string, ObjectFactory*> objectFactories;
+    unordered_map<string, ObjectFactory*> objectFactories;
 
     Reflector() = default;
 
-    ::ReflectObject* getNewInstance(const std::string& className);
+    ::ReflectObject* getNewInstance(const string& className);
 
   public:
     Reflector(const Reflector&) = delete;
 
     ~Reflector();
 
-    void registerFactory(const std::string& className, ObjectFactory* objectFactory);
+    void registerFactory(const string& className, ObjectFactory* objectFactory);
 
     template <typename T>
-    static T* getNewInstance(const std::string& className) {
+    static T* getNewInstance(const string& className) {
         return dynamic_cast<T*>(Reflector::getReflector().getNewInstance(className));
     }
 

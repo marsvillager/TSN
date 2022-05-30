@@ -8,8 +8,8 @@
 
 #include "../src/timer/ITimer.h"
 
-using namespace std;
 using namespace faker_tsn;
+using namespace std;
 
 static void TestClockGetTime() {
     struct timespec ts;
@@ -160,18 +160,18 @@ static void TestPQTimer() {
     INFO("Start Time = " + start.toString());
     INFO("Expire Time = " + expire.toString());
     INFO("Period Time = " + period.toString());
-    std::shared_ptr<Ticker> ticker1 = std::make_shared<Ticker>(start, expire, period);
-    INFO("Ticker ID: " + std::to_string(ticker1->getId()));  // 其属性 id 每创建一个自动加 1
-    INFO("is periodic: " + std::to_string(ticker1->isPeriodic()) + "\n");
+    shared_ptr<Ticker> ticker1 = make_shared<Ticker>(start, expire, period);
+    INFO("Ticker ID: " + to_string(ticker1->getId()));  // 其属性 id 每创建一个自动加 1
+    INFO("is periodic: " + to_string(ticker1->isPeriodic()) + "\n");
 
     // ticker2
     Time::TimeInterval expire2 = Time::TimeInterval(2, 800000000);  // +2.8s
     INFO("Start Time = " + start.toString());
     INFO("Expire Time = " + expire2.toString());
     INFO("Period Time = " + period.toString());
-    std::shared_ptr<Ticker> ticker2 = std::make_shared<Ticker>(start, expire2, period);
-    INFO("Ticker ID: " + std::to_string(ticker2->getId()));
-    INFO("is periodic: " + std::to_string(ticker2->isPeriodic()) + "\n");
+    shared_ptr<Ticker> ticker2 = make_shared<Ticker>(start, expire2, period);
+    INFO("Ticker ID: " + to_string(ticker2->getId()));
+    INFO("is periodic: " + to_string(ticker2->isPeriodic()) + "\n");
 
     timer.addTicker(ticker1);
     timer.addTicker(ticker2);

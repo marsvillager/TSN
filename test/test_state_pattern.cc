@@ -3,12 +3,13 @@
 #include <memory>
 
 using namespace faker_tsn;
+using namespace std;
 
 void Test_State_Pattern() {
     // 定义
     TSNContext& context = TSNContext::getInstance();
-    std::shared_ptr<ITSNContextState> initState = std::make_shared<InitTSNContextState>();
-    std::shared_ptr<ITSNContextState> runState = std::make_shared<RunTSNContextState>();
+    shared_ptr<ITSNContextState> initState = make_shared<InitTSNContextState>();
+    std:shared_ptr<ITSNContextState> runState = make_shared<RunTSNContextState>();
 
     initState->doAction(context);
     runState->doAction(context);

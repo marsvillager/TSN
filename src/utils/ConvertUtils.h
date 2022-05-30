@@ -4,18 +4,20 @@
 #include <string>
 #include <vector>
 
+using namespace std;
+
 class ConvertUtils {
   public:
-    static std::string convertDecToHexString(long long mem, int octs) {
+    static string convertDecToHexString(long long mem, int octs) {
         char* buf = new char(octs * 2);
         sprintf(buf, "%.2X", mem);
-        std::string target(buf);
+        string target(buf);
         delete buf;
         return target;
     }
 
-    static std::string converBinToHexString(unsigned char* mem, int len, std::string tok = " ") {
-        std::string output = "0x";
+    static string converBinToHexString(unsigned char* mem, int len, string tok = " ") {
+        string output = "0x";
         output.append(tok);
         char temp[8];
         for (int i = 0; i < len; ++i) {
@@ -27,9 +29,9 @@ class ConvertUtils {
     }
 
     /* conver mac address string to raw mac address */
-    static void converMacStringtoBin(const std::string& macString, unsigned char* mac) {
+    static void converMacStringtoBin(const string& macString, unsigned char* mac) {
         for (int i = 0, j = 0; i < 6; i++, j += 3) {
-            int n = std::stoi(macString.substr(j, 2), 0, 16);
+            int n = stoi(macString.substr(j, 2), 0, 16);
             memcpy(mac + i, (unsigned char*)&n, 1);
         }
     }

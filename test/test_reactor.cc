@@ -2,10 +2,11 @@
 #include <gtest/gtest.h>
 
 using namespace faker_tsn;
+using namespace std;
 
 static void TestReactor() {
     // stdinEventHandler, EVENT_TYPE::READ
-    // std::shared_ptr<IPort> port = std::make_shared<ConsolePort>();  // create port
+    // shared_ptr<IPort> port = make_shared<ConsolePort>();  // create port
 
     // port->registerEventHandler();
     // Reactor::getInstance().handle_events();

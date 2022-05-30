@@ -13,6 +13,7 @@
 #include "../src/utils/log/Log.h"
 
 using namespace faker_tsn;
+using namespace std;
 
 static void TestRecv() {
     union ethframe {
@@ -91,8 +92,8 @@ static void TestRecv() {
         // INFO("construct ethernet frame");
         // INFO("dest mac = " + MacAddress::toRaw(dest));
         // INFO("src mac = " + MacAddress::toRaw(src));
-        // INFO("protocol = " + std::to_string(proto));
-        // INFO("data = " + std::string(data));
+        // INFO("protocol = " + to_string(proto));
+        // INFO("data = " + string(data));
 
         INFO("Decode frame");
 
@@ -107,7 +108,7 @@ static void TestRecv() {
         // vlan tag
         INFO("TCI = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(frame) + 14, 2));
         VlanTCI vlanTCI = VlanTCI::parse(frame->filed.header.vlan_tag.h_vlan_TCI);
-        INFO("VlanTCI.pcp = " + std::to_string(vlanTCI.pcp));
+        INFO("VlanTCI.pcp = " + to_string(vlanTCI.pcp));
         INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(frame) + 16, 2));
         INFO("reserved = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(frame) + 18, 2));
         // r-tag
@@ -115,7 +116,7 @@ static void TestRecv() {
         INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(frame) + 22, 2));
         // data
         // INFO("data = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(frame) + 24, 13));
-        INFO("data(string) = " + std::string(reinterpret_cast<char*>(frame) + 24));
+        INFO("data(string) = " + string(reinterpret_cast<char*>(frame) + 24));
     }
 
     close(sockfd);

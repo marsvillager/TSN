@@ -6,6 +6,7 @@
 #include "../src/utils/log/Log.h"
 
 using namespace faker_tsn;
+using namespace std;
 
 /* callable function */
 static void my_callback(u_char* useless, const struct pcap_pkthdr* pkthdr, const u_char* packet) {
@@ -32,7 +33,7 @@ static void TestPCAPLookUpDev() {
         fprintf(stderr, "Couldn't find default device: %s\n", errbuf);
         exit(EXIT_FAILURE);
     }
-    INFO("Device: " + std::string(dev));
+    INFO("Device: " + string(dev));
 }
 
 void helper(sockaddr* _addr, const char* info) {
