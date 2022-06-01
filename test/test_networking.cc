@@ -249,9 +249,7 @@ static void TestMacTable() {
     ConfigSetting& cs = ConfigSetting::getInstance();
     /* load config file */
     string filename = cs.get<string>("routesDir");
-    cout << filename << endl;
     MacTable::loadRouteXML(filename);
-    // MacTable::loadRouteXML("/home/reptile/文档/TSN/config/routes.xml");
     INFO("\n" + MacTable::toString());
 }
 
