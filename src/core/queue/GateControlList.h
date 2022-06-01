@@ -49,8 +49,7 @@ class GateControlList : public REFLECT_OBJECT, public DynamicCreator<GateControl
     virtual void loadScheduleXML(std::string filename);
 
   public:
-    GateControlList(unsigned int portId)
-        : m_portId(portId) {
+    GateControlList(unsigned int portId): m_portId(portId) {
         ConfigSetting& cs = ConfigSetting::getInstance();
         /* load config file */
         std::string filename = cs.get<std::string>("gclDir");
@@ -61,7 +60,6 @@ class GateControlList : public REFLECT_OBJECT, public DynamicCreator<GateControl
         for (GateControlListItem item : this->m_gcl) {
             INFO(item.toString() + "\n");
 
-            // 添加计时器
             std::shared_ptr<Ticker> ticker = std::make_shared<Ticker>(
                 start,
                 item.m_timeInterval,

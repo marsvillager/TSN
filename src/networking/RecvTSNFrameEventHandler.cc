@@ -2,10 +2,7 @@
 
 namespace faker_tsn {
 
-RecvTSNFrameEventHandler::RecvTSNFrameEventHandler(
-    HANDLE handle,
-    struct sockaddr_ll& sockAddrII)
-    : m_handle(handle) {
+RecvTSNFrameEventHandler::RecvTSNFrameEventHandler(HANDLE handle, struct sockaddr_ll& sockAddrII): m_handle(handle) {
     memcpy(&this->m_sockAddrII, &sockAddrII, sizeof(sockAddrII));
     this->m_isEnhanced = ConfigSetting::getInstance().get<bool>("enhancedGCL");
 }
@@ -28,10 +25,11 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     }
 
     // TODO
-    unsigned char destMac[ETH_ALEN] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x01};
+    unsigned char destMac1[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
+    unsigned char destMac2[ETH_ALEN] = {0x21, 0x00, 0x5E, 0x00, 0x00, 0x01};
     unsigned char src[ETH_ALEN];
     memcpy(src, &this->m_sockAddrII.sll_addr, ETH_ALEN);
-    if (memcmp(recvbuf, destMac, 6) != 0) {
+    if (memcmp(recvbuf, destMac1, 6) != 0 && memcmp(recvbuf, destMac2, 6) != 0) {
         INFO("------------- Non-TSN frame --------------");
         return;
     } else {

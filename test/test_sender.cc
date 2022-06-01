@@ -55,12 +55,15 @@ static void TestSend() {
         /* construct ethernet header */
         struct ethhdr eth_hdr;
         memset(&eth_hdr, 0x00, sizeof(eth_hdr));
-        unsigned char dest[ETH_ALEN] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x01};
-        memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);   // set dest mac
+        unsigned char dest1[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
+        unsigned char dest2[ETH_ALEN] = {0x21, 0x00, 0x5E, 0x00, 0x00, 0x01};
+        if (i%2) memcpy(&eth_hdr.h_dest, dest1, ETH_ALEN);
+        else memcpy(&eth_hdr.h_dest, dest2, ETH_ALEN);
+        // memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);   // set dest mac
         memcpy(&eth_hdr.h_source, mac, ETH_ALEN);  // set src mac
         // don't set ETH_P_8021Q, it will ceause receiver to discard vlan tag
         eth_hdr.h_proto = htons(ETH_P_ALL);  // set IEEE 802.1Q protocol
-        // INFO("dest mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_dest), 6));
+        INFO("dest mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_dest), 6));
         // INFO("src mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_source), 6));
         // INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_proto), 2) + "\n");
 
