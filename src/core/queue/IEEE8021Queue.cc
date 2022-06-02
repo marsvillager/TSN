@@ -20,7 +20,7 @@ IEEE8021Queue::IEEE8021Queue(unsigned short portIndex, uint8_t pcp)
 IEEE8021Queue::~IEEE8021Queue() {}
 
 void IEEE8021Queue::enqueue(IFrameBody* frame) {
-    INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + " enqueue");
+    // INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + " enqueue");
 
     this->m_innerBuffer->enqueue(frame);
 }

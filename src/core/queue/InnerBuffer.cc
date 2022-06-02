@@ -6,17 +6,16 @@ InnerBuffer::InnerBuffer(unsigned short portIndex, uint8_t pcp, uint32_t capacit
     : m_portIndex(portIndex), m_pcp(pcp), m_capacity(capacity), m_residualCapacity(capacity), m_usedCapacity(0) {
     this->m_deviceName = ConfigSetting::getInstance().get<std::string>("deviceName");
 
-    INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity: " + std::to_string(this->m_capacity));
-    INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(used): " + std::to_string(this->m_usedCapacity));
-    INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(residual): " + std::to_string(this->m_residualCapacity));
+    // INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity: " + std::to_string(this->m_capacity));
+    // INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(used): " + std::to_string(this->m_usedCapacity));
+    // INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(residual): " + std::to_string(this->m_residualCapacity));
 }
 
 InnerBuffer::~InnerBuffer() {
 }
 
 void InnerBuffer::drop(IFrameBody* frameBody) {
-    std::cout << std::endl
-              << "Drop frame\n\n";
+    std::cout << std::endl << "Drop frame\n\n";
     // INFO("Drop frame\n");
     // delete frameBody;
 }
@@ -33,8 +32,8 @@ void InnerBuffer::enqueue(IFrameBody* frameBody) {
     this->m_usedCapacity += frameBody->getBytes();
     this->m_buffer.push_back(frameBody);
 
-    INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(used): " + std::to_string(this->m_usedCapacity));
-    INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(residual): " + std::to_string(this->m_residualCapacity));
+    // INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(used): " + std::to_string(this->m_usedCapacity));
+    // INFO(this->m_deviceName + ".port" + std::to_string(this->m_portIndex) + ".queue" + std::to_string(this->m_pcp) + ".innerBuffer.capacity(residual): " + std::to_string(this->m_residualCapacity));
 }
 
 IFrameBody* InnerBuffer::dequeue() {

@@ -6,8 +6,7 @@ namespace faker_tsn {
 
 uint8_t DataPort::s_portNum = 0;
 
-DataPort::DataPort(const char* deviceName)
-    : m_deviceID(DataPort::s_portNum++), m_deviceName(deviceName) {
+DataPort::DataPort(const char* deviceName): m_deviceID(DataPort::s_portNum++), m_deviceName(deviceName) {
     INFO("Construct Port[" + std::to_string(s_portNum) + "|" + std::string(this->m_deviceName) + "] created");
     this->m_sockfd = socket(PF_PACKET, SOCK_RAW, 0);
     printf("m_sockfd: %d\n", this->m_sockfd);

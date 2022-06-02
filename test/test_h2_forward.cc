@@ -33,8 +33,10 @@ static void Sender() {
     // portManager->appendPort(port2);
     // portManager->appendPort(port3);
 
-    // load mac table
-    MacTable::loadRouteXML("/home/reptile/下载/TSN/config/routes.xml");
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    string filename = cs.get<string>("routesDir");
+    MacTable::loadRouteXML(filename);
 
     // enable reactor
     Reactor::getInstance().handle_events();
