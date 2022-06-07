@@ -23,7 +23,7 @@ TEST_SENDER = $(DIR_BIN_TEST)/test_sender
 TEST_RECEIVER = $(DIR_BIN_TEST)/test_receiver
 TEST_LIBPCAP = $(DIR_BIN_TEST)/test_libpcap
 TEST_NETWORKING = $(DIR_BIN_TEST)/test_networking
-TEST_H2_FORWARD = $(DIR_BIN_TEST)/test_h2_forward
+TEST_FORWARD = $(DIR_BIN_TEST)/test_forward
 TEST_LOGGER = $(DIR_BIN_TEST)/test_logger
 TEST_STATE_PATTERN = $(DIR_BIN_TEST)/test_state_pattern
 
@@ -39,7 +39,7 @@ OBJS = $(filter-out $(DIR_BIN)/main.o, $(wildcard ${DIR_BIN}/*.o))
 TEST_SRCS = $(wildcard ./*.cc)
 TEST_OBJS = $(patsubst %.cc, ${DIR_BIN_TEST}/%.o, $(notdir $(TEST_SRCS)))
 
-TARGETS := $(TEST_REFLECTOR) $(TEST_CONFIGSETTING) $(TEST_TIMER) $(TEST_QUEUE) $(TEST_TINYXML2) $(TEST_PORT_MANAGER) $(TEST_REACTOR) $(TEST_SENDER) $(TEST_RECEIVER) $(TEST_LIBPCAP) $(TEST_NETWORKING) $(TEST_H2_FORWARD) $(TEST_LOGGER) $(TEST_STATE_PATTERN)
+TARGETS := $(TEST_REFLECTOR) $(TEST_CONFIGSETTING) $(TEST_TIMER) $(TEST_QUEUE) $(TEST_TINYXML2) $(TEST_PORT_MANAGER) $(TEST_REACTOR) $(TEST_SENDER) $(TEST_RECEIVER) $(TEST_LIBPCAP) $(TEST_NETWORKING) $(TEST_FORWARD) $(TEST_LOGGER) $(TEST_STATE_PATTERN)
 
 all : $(TARGETS)
 
@@ -120,11 +120,11 @@ $(DIR_BIN_TEST)/test_networking.o : test_networking.cc $(GTEST_HEADERS)
 $(TEST_NETWORKING) : $(DIR_BIN_TEST)/test_networking.o 
 	$(CXX) $(CXXFLAGS) -lpthread $^ $(OBJS) -o $@ $(GTEST_LIB) $(LIBS)
 
-# test_h2_forward
-$(DIR_BIN_TEST)/test_h2_forward.o : test_h2_forward.cc $(GTEST_HEADERS)
+# test_forward
+$(DIR_BIN_TEST)/test_forward.o : test_forward.cc $(GTEST_HEADERS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(TEST_H2_FORWARD) : $(DIR_BIN_TEST)/test_h2_forward.o $(OBJS)
+$(TEST_FORWARD) : $(DIR_BIN_TEST)/test_forward.o $(OBJS)
 	$(CXX) $(CXXFLAGS) -lpthread $^ -o $@ $(GTEST_LIB) $(LIBS)
 
 # test_logger
