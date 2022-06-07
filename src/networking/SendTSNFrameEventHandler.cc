@@ -3,10 +3,8 @@
 
 namespace faker_tsn {
 
-SendTSNFrameEventHandler::SendTSNFrameEventHandler(
-    HANDLE handle,
-    struct sockaddr_ll& sockAddrII,
-    std::shared_ptr<QueueContext> queueContext): m_handle(handle),  m_queueContext(queueContext) {
+SendTSNFrameEventHandler::SendTSNFrameEventHandler(HANDLE handle, struct sockaddr_ll& sockAddrII, std::shared_ptr<QueueContext> queueContext):
+     m_handle(handle),  m_queueContext(queueContext) {
     memcpy(&this->m_sockAddrII, &sockAddrII, sizeof(sockAddrII));
 }
 
