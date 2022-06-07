@@ -32,7 +32,7 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     /* construct ethernet header */
     struct ethhdr eth_hdr;
     memset(&eth_hdr, 0x00, sizeof(eth_hdr));
-    unsigned char dest[ETH_ALEN] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x01};
+    unsigned char dest[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
     memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);                           // set dest mac
     memcpy(&eth_hdr.h_source, this->m_sockAddrII.sll_addr, ETH_ALEN);  // set src mac
     eth_hdr.h_proto = htons(ETH_P_ALL);                                // set IEEE 802.1Q protocol

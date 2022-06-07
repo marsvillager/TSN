@@ -25,11 +25,10 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     }
 
     // TODO
-    unsigned char destMac1[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
-    unsigned char destMac2[ETH_ALEN] = {0x21, 0x00, 0x5E, 0x00, 0x00, 0x01};
+    unsigned char destMac[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
     unsigned char src[ETH_ALEN];
     memcpy(src, &this->m_sockAddrII.sll_addr, ETH_ALEN);
-    if (memcmp(recvbuf, destMac1, 6) != 0 && memcmp(recvbuf, destMac2, 6) != 0) {
+    if (memcmp(recvbuf, destMac, 6) != 0) {
         INFO("------------- Non-TSN frame --------------");
         return;
     } else {
