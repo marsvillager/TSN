@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <filteringDatabases>
-  <filteringDatabase id="switch1">
+  <filteringDatabase id="ens33">
     <static>
       <forward>
         <individualAddress port="0" macAddress="00-0c-29-ad-5c-75"/>
@@ -9,7 +9,7 @@
       </forward>
     </static>
   </filteringDatabase>
-  <filteringDatabase id="switch2">
+  <filteringDatabase id="enp2s0">
     <static>
       <forward>
         <individualAddress port="2" macAddress="00-0c-29-ad-5c-75"/>

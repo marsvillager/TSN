@@ -20,8 +20,10 @@ static void TestPortManager() {
 }
 
 static void TestPort() {
-    const char* name = "ens33";
-    shared_ptr<IPort> port = make_shared<DataPort>(name);
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* deviceName = cs.get<const char*>("deviceName");
+    shared_ptr<IPort> port = make_shared<DataPort>(deviceName);
     shared_ptr<IPortState> creationState = make_shared<CreationPortState>();
     creationState->doAction(port);
     port->sendTest();
@@ -110,7 +112,9 @@ static void TestSendRecv() {
     int sockfd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_TSN));
 
     /* get interface index */
-    char* deviceName = "ens33";
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* deviceName = cs.get<const char*>("deviceName");
     struct ifreq buffer;
     int ifindex;
     memset(&buffer, 0x00, sizeof(buffer));

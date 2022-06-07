@@ -25,8 +25,9 @@ static void TestRecv() {
         unsigned char buffer[ETH_FRAME_LEN];
     };
 
-    // const char* deviceName = "h3-eth0";
-    const char* deviceName = "ens33";
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* deviceName = cs.get<const char*>("deviceName");
 
     /* create raw socket */
     int sockfd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_8021Q));

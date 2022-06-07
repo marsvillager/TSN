@@ -38,7 +38,10 @@ static void TestGetMulticastMacAddress() {
     struct ifreq buffer;
     int ifindex;
     memset(&buffer, 0x00, sizeof(buffer));
-    strncpy(buffer.ifr_name, "ens33", IFNAMSIZ);  // ifr_name
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* deviceName = cs.get<const char*>("deviceName");
+    strncpy(buffer.ifr_name, deviceName, IFNAMSIZ);  // ifr_name
 
     // 1、socket io control get interface hardware address
     if (ioctl(sockfd, SIOCGIFHWADDR, &buffer) < 0) { /* Get hardware address */
@@ -119,7 +122,10 @@ static void TestGetMulticastMacAddress() {
 
 static void TestGetMacAddress() {
     try {
-        MacAddress* macAddress = LinkLayerInterface::getMacAddress("ens33");
+        ConfigSetting& cs = ConfigSetting::getInstance();
+        /* load config file */
+        const char* deviceName = cs.get<const char*>("deviceName");
+        MacAddress* macAddress = LinkLayerInterface::getMacAddress(deviceName);
 
         unsigned char rawMac[ETH_ALEN];
         macAddress->getRaw(rawMac);
@@ -134,7 +140,10 @@ static void TestGetMacAddress() {
 
 static void TestGetIndex() {
     try {
-        int index = LinkLayerInterface::getIndex("ens33");
+        ConfigSetting& cs = ConfigSetting::getInstance();
+        /* load config file */
+        const char* deviceName = cs.get<const char*>("deviceName");
+        int index = LinkLayerInterface::getIndex(deviceName);
     } catch (const exception& e) {
         cerr << e.what() << '\n';
     }
@@ -142,7 +151,10 @@ static void TestGetIndex() {
 
 static void TestFindInterface() {
     try {
-        LinkLayerInterface* interface = LinkLayerInterface::findInterface("ens33");
+        ConfigSetting& cs = ConfigSetting::getInstance();
+        /* load config file */
+        const char* deviceName = cs.get<const char*>("deviceName");
+        LinkLayerInterface* interface = LinkLayerInterface::findInterface(deviceName);
         INFO(interface->toString());
     } catch (const exception& e) {
         cerr << e.what() << '\n';
@@ -150,7 +162,9 @@ static void TestFindInterface() {
 }
 
 static void TestIfEther() {
-    const char* deviceName = "ens33";
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* deviceName = cs.get<const char*>("deviceName");
 
     /* get interface index */
     int ifindex = LinkLayerInterface::getIndex(deviceName);
@@ -254,10 +268,10 @@ static void TestMacTable() {
 }
 
 TEST(TEST_NETWORKING, TEST_NETWORKING_INTERFACE) {
-    // TestGetMulticastMacAddress();  // 通过套接字获取所有网卡设备的 MAC 地址
-    // TestGetMacAddress();           // 通过抓包库 libpcap 获取指定网卡设备的 MAC 地址（LinkLayerInterface 类中定义的方法）
-    // TestGetIndex();                // 通过套接字获取指定网卡设备的接口索引（LinkLayerInterface 类中定义的方法）
-    // TestFindInterface();           // 通过套接字和抓包库 libpcap 实现 LinkLayerInterface 类对象的定义（name、index、mac）
+    TestGetMulticastMacAddress();  // 通过套接字获取所有网卡设备的 MAC 地址
+    TestGetMacAddress();           // 通过抓包库 libpcap 获取指定网卡设备的 MAC 地址（LinkLayerInterface 类中定义的方法）
+    TestGetIndex();                // 通过套接字获取指定网卡设备的接口索引（LinkLayerInterface 类中定义的方法）
+    TestFindInterface();           // 通过套接字和抓包库 libpcap 实现 LinkLayerInterface 类对象的定义（name、index、mac）
     // TestIfEther();                 // 上面四种的综合
 }
 

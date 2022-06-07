@@ -25,8 +25,9 @@ static void TestSend() {
         unsigned char buffer[ETH_FRAME_LEN];
     };  // ethframe
 
-    // const char* deviceName = "h1-eth0";
-    const char* deviceName = "ens33";
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* deviceName = cs.get<const char*>("deviceName");
 
     /* create raw socket */
     int sockfd = socket(PF_PACKET, SOCK_RAW, htons(ETH_P_8021Q));  // create socket
@@ -56,12 +57,13 @@ static void TestSend() {
         struct ethhdr eth_hdr;
         memset(&eth_hdr, 0x00, sizeof(eth_hdr));
         unsigned char dest[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
+        memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);   // set dest mac
         memcpy(&eth_hdr.h_source, mac, ETH_ALEN);  // set src mac
         // don't set ETH_P_8021Q, it will ceause receiver to discard vlan tag
         // eth_hdr.h_proto = htons(ETH_P_ALL);  // set IEEE 802.1Q protocol
         eth_hdr.h_proto = htons(0x8100);  // set IEEE 802.1Q protocol
         INFO("dest mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_dest), 6));
-        // INFO("src mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_source), 6));
+        INFO("src mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_source), 6));
         INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_proto), 2) + "\n");
 
         /* construct VLAN-tag */

@@ -1,9 +1,8 @@
+#include <faker_tsn.h>
 #include <gtest/gtest.h>
 #include <linux/if_packet.h>
 #include <net/if.h>
 #include <pcap/pcap.h>
-
-#include "../src/utils/log/Log.h"
 
 using namespace faker_tsn;
 using namespace std;
@@ -88,7 +87,9 @@ static void TestPCAPFindAllDevs() {
 
 static void TestPCAPLoop() {
     /* open the session on non-promiscouos mode */
-    char* dev = "ens33";
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* dev = cs.get<const char*>("deviceName");
     char errbuf[PCAP_ERRBUF_SIZE];
     pcap_t* handle;
     handle = pcap_open_live(dev, BUFSIZ, 0, -1, errbuf);
