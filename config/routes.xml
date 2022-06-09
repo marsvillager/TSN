@@ -4,7 +4,7 @@
     <static>
       <forward>
         <individualAddress port="0" macAddress="00-0c-29-ad-5c-75"/>
-        <individualAddress port="0" macAddress="00-0c-29-ed-5a-ad"/>
+        <individualAddress port="1" macAddress="00-0c-29-ed-5a-ad"/>
         <individualAddress port="0" macAddress="00-0c-29-e1-8c-3d"/>
       </forward>
     </static>
@@ -12,9 +12,9 @@
   <filteringDatabase id="enp2s0">
     <static>
       <forward>
-        <individualAddress port="2" macAddress="00-0c-29-ad-5c-75"/>
-        <individualAddress port="2" macAddress="01-00-5E-00-00-01"/>
-        <individualAddress port="1" macAddress="00-00-00-00-00-0C"/>
+        <individualAddress port="0" macAddress="00-0c-29-ad-5c-75"/>
+        <individualAddress port="1" macAddress="00-0c-29-ed-5a-ad"/>
+        <individualAddress port="0" macAddress="00-0c-29-e1-8c-3d"/>
       </forward>
     </static>
   </filteringDatabase>
