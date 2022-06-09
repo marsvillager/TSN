@@ -24,11 +24,10 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
         INFO("Recv error!");
     }
 
-    // TODO
-    unsigned char destMac[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
-    unsigned char src[ETH_ALEN];
-    memcpy(src, &this->m_sockAddrII.sll_addr, ETH_ALEN);
-    if (memcmp(recvbuf, destMac, 6) != 0) {
+    // filter
+    unsigned short proto = htons(0x8100);
+    INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&proto), 2) + "\n");
+    if (memcmp(recvbuf + 12, reinterpret_cast<unsigned char*>(&proto), 2) != 0) {
         INFO("------------- Non-TSN frame --------------");
         return;
     } else {
