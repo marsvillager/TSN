@@ -28,11 +28,18 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
         INFO("Nothing to be sent\n");
         return;
     }
+    std::cout << "data bytes: " << frameBody->getBytes() << std::endl;
+    std::cout << "data: " << frameBody->getData();
+    std::cout << "pcp: " << frameBody->getPCP() << std::endl;
+    std::cout << "seq:" << frameBody->getSeq() << std::endl;
+    RELAY_ENTITY type = frameBody->getType();
+    std::cout << "type: " << type << std::endl;
+    std::cout << "vid: " << frameBody->getVID() << std::endl;
 
     /* construct ethernet header */
     struct ethhdr eth_hdr;
     memset(&eth_hdr, 0x00, sizeof(eth_hdr));
-    unsigned char dest[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
+    unsigned char dest[ETH_ALEN] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x01};
     memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);                           // set dest mac
     memcpy(&eth_hdr.h_source, this->m_sockAddrII.sll_addr, ETH_ALEN);  // set src mac
     eth_hdr.h_proto = htons(ETH_P_ALL);                                // set IEEE 802.1Q protocol
