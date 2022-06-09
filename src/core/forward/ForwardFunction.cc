@@ -13,14 +13,8 @@ void ForwardFunction::forward(const unsigned char* srcMac, void* data, size_t le
     /* get outbound ports */
     std::vector<unsigned short> ports = MacTable::findOutboundPorts(srcMac);
 
-    // TODO unicast & multicast
-    ports = std::vector<unsigned short>();
-    ports.push_back(0);
-    // ports.push_back(1);
-    // ports.push_back(2);
-    std::vector<unsigned short>::iterator it;
     std::cout << "ports: ";
-    for (it = ports.begin(); it != ports.end(); it++)
+    for (auto it = ports.begin(); it != ports.end(); it++)
         std::cout << *it << " ";
     std::cout << std::endl;
 
