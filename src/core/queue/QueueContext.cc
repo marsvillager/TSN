@@ -28,7 +28,7 @@ void QueueContext::enqueue(IFrameBody* frame) {
     if (frame->getType() == IEEE_802_1Q_TSN_FRAME || frame->getType() == IEEE_802_1Q_TSN_FRAME_E) {  // TSN frame or enhanced TSN frame
         TSNFrameBody* tsnFrame = dynamic_cast<TSNFrameBody*>(frame);
         uint8_t pcp = static_cast<uint8_t>(tsnFrame->getPCP());
-        INFO("frame size：" + std::to_string(tsnFrame->getBytes()));
+        INFO("frame size: " + std::to_string(tsnFrame->getBytes()));
         this->m_queues[pcp]->enqueue(tsnFrame);
     } else if (frame->getType() == IEEE_802_1Q_FRAME) {  // IEEE 802.1Q frame
         // TODO

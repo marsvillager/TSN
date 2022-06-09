@@ -53,8 +53,7 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     unsigned char srcMac[ETH_ALEN];
     memcpy(srcMac, recvbuf + 6, ETH_ALEN);
     RELAY_ENTITY type = IEEE_802_1Q_TSN_FRAME;
-    if (this->m_isEnhanced)
-        type = IEEE_802_1Q_TSN_FRAME_E;
+    if (this->m_isEnhanced) type = IEEE_802_1Q_TSN_FRAME_E;
     ForwardFunction::forward(srcMac, reinterpret_cast<void*>(frame), sizeof(frame), type);
 }
 

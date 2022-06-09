@@ -13,7 +13,7 @@ class TSNFrameBody : public IFrameBody {
   private:
     unsigned short m_pcp;               /* priority code point */
     unsigned short m_vid;               /* vlan id */
-    unsigned short m_seq;               /* sequencr nubmer */
+    unsigned short m_seq;               /* sequence nubmer */
     unsigned int m_bytes;               /* no. of bytes */
     unsigned char m_data[ETH_DATA_LEN]; /* data */
 
@@ -53,6 +53,10 @@ class TSNFrameBody : public IFrameBody {
 
     virtual unsigned int getBytes() override {
         return this->m_bytes;
+    }
+
+    unsigned char* getData() {
+        return this->m_data;
     }
 };
 
