@@ -10,7 +10,7 @@ class ConvertUtils {
   public:
     static string convertDecToHexString(long long mem, int octs) {
         char* buf = new char(octs * 2);
-        sprintf(buf, "%.2X", mem);
+        sprintf(buf, "%.2llX", mem);
         string target(buf);
         delete buf;
         return target;
