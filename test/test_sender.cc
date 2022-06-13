@@ -61,7 +61,7 @@ static void TestSend() {
         memcpy(&eth_hdr.h_source, mac, ETH_ALEN);  // set src mac
         // don't set ETH_P_8021Q, it will ceause receiver to discard vlan tag
         // eth_hdr.h_proto = htons(ETH_P_ALL);  // set IEEE 802.1Q protocol
-        eth_hdr.h_proto = htons(0x8100);  // set IEEE 802.1Q protocol
+        eth_hdr.h_proto = htons(ETH_P_8021Q);  // set IEEE 802.1Q protocol
         INFO("dest mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_dest), 6));
         INFO("src mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_source), 6));
         INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_proto), 2) + "\n");
@@ -75,12 +75,13 @@ static void TestSend() {
         // INFO("dei = " + to_string(tci.dei));
         // INFO("vid = " + to_string(tci.vid));
 
-        // __be16 tci = TCI[i%8]; // 一轮优先级测试
+        // __be16 tci = TCI[i % 8]; // 一轮优先级测试
         __be16 tci = TCI[i % 4];  // 一轮优先级测试
         struct vlan_hdr vlan_tag;
         memset(&vlan_tag, 0x00, sizeof(vlan_tag));
         memcpy(&vlan_tag.h_vlan_TCI, &tci, sizeof(tci));        // set TCI
-        vlan_tag.h_vlan_encapsulated_proto = htons(ETH_P_ALL);  // set IEEE 1722 protocol
+        // vlan_tag.h_vlan_encapsulated_proto = htons(ETH_P_ALL);
+        vlan_tag.h_vlan_encapsulated_proto = htons(0x0002);  
         // INFO("TCI = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&vlan_tag.h_vlan_TCI), 2));
         // INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&vlan_tag.h_vlan_encapsulated_proto), 2) + "\n");
 
@@ -103,18 +104,6 @@ static void TestSend() {
         memcpy(&frame.filed.header.vlan_tag, &vlan_tag, sizeof(vlan_tag));
         memcpy(&frame.filed.header.r_tag, &rtag, sizeof(rtag));
         memcpy(frame.filed.data, data, strlen(data));
-        // INFO("data = " + string(data) + "\n");
-
-        /* fill in frame */
-        // union ethframe frame;
-        // unsigned char dest[ETH_ALEN] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};  // src mac
-        // const char* data = "hello world\n";
-        // unsigned short data_len = strlen(data);
-        // unsigned int frame_len = data_len + ETH_HLEN;
-        // memcpy(frame.field.header.h_dest, dest, ETH_ALEN);   // set dest mac
-        // memcpy(frame.field.header.h_source, mac, ETH_ALEN);  // set src mac
-        // frame.field.header.h_proto = htons(ETH_P_ALL);       // set protocol
-        // memcpy(frame.field.data, data, data_len);            // set data payload
 
         /* set linklayer address */
         struct sockaddr_ll saddrll;  // link layer socker address struct
@@ -123,7 +112,6 @@ static void TestSend() {
         saddrll.sll_ifindex = ifindex;            // set interface index
         saddrll.sll_halen = ETH_ALEN;             // set address length
         saddrll.sll_protocol = htons(ETH_P_ALL);  // set protocol
-        // memcpy((void*)(saddrll.sll_addr), (void*)dest, ETH_ALEN);  // set mac
 
         /* send data */
         if (sendto(sockfd, frame.buffer, frame_len, 0, (struct sockaddr*)&saddrll, sizeof(saddrll)) > 0)

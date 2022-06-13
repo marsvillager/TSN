@@ -76,22 +76,19 @@ int main (int argc, char **argv)
     device.sll_halen = htons (6);
 
     // 发送的data，长度可以任意，但是抓包时看到最小数据长度为46，这是以太网协议规定以太网帧数据域部分最小为46字节，不足的自动补零处理
-    datalen = 14;
-    // data[0-3]:802.1q virtual lan
-    data[0] = 0x00;
-    data[1] = 0x11;
-    data[2] = 'h';
-    data[3] = 'e';
-    data[4] = 'l';
-    data[5] = 'l';
-    data[6] = 'o';
-    data[7] = ' ';
-    data[8] = 'w';
-    data[9] = 'o';
-    data[10] = 'r';
-    data[11] = 'l';
-    data[12] = 'd';
-    data[13] = '!';
+    datalen = 16;
+    data[0] = 'h';
+    data[1] = 'e';
+    data[2] = 'l';
+    data[3] = 'l';
+    data[4] = 'o';
+    data[5] = ' ';
+    data[6] = 'w';
+    data[7] = 'o';
+    data[8] = 'r';
+    data[9] = 'l';
+    data[10] = 'd';
+    data[11] = '!';
 
     // Fill out ethernet frame header：src_mac dst_mac type
     frame_length = 6 + 6 + 2   + datalen;
@@ -102,8 +99,12 @@ int main (int argc, char **argv)
     ether_frame[12] = ETH_P_DEAN / 256;
     ether_frame[13] = ETH_P_DEAN % 256;
 
+    // TCI
+    ether_frame[14] = 0x00;
+    ether_frame[15] = 0x01;
+
     // data
-    memcpy (ether_frame + 14 , data, datalen);
+    memcpy (ether_frame + 16 , data, datalen);
     
     // Submit request for a raw socket descriptor.
     if ((sd = socket (PF_PACKET, SOCK_RAW, htons (ETH_P_ALL))) < 0) {//创建正真发送的socket
