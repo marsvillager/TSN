@@ -25,7 +25,8 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     }
 
     // filter
-    unsigned short proto = htons(ETH_P_8021Q);
+    // unsigned short proto = htons(ETH_P_8021Q);
+    unsigned short proto = htons(0x0081);
     // INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>((recvbuf + 12)), 2));
     INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(recvbuf), 36));
     if (memcmp(recvbuf + 12, reinterpret_cast<unsigned char*>(&proto), 2) != 0) {
@@ -34,8 +35,6 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     } else {
         INFO("------------- TSN frame  --------------\n");
     }
-
-    // INFO("Decode frame");
 
     /* parse raw data to tsn frame */
     TSNFrameBody* frame = new TSNFrameBody();
@@ -47,7 +46,8 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     __be16 seq;
     memcpy(&seq, recvbuf + 20, 2);
     frame->setSeq(ntohs(seq));
-    frame->setData(recvbuf + 24, strlen((char*)recvbuf + 24));
+    frame->setFrame(recvbuf);
+
 
     /* forward frame */
     unsigned char srcMac[ETH_ALEN];

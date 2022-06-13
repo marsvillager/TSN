@@ -28,21 +28,15 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
         INFO("Nothing to be sent\n");
         return;
     }
-    std::cout << "data bytes: " << frameBody->getBytes() << std::endl;
-    std::cout << "data: " << frameBody->getData();
-    std::cout << "pcp: " << frameBody->getPCP() << std::endl;
-    std::cout << "seq:" << frameBody->getSeq() << std::endl;
-    RELAY_ENTITY type = frameBody->getType();
-    std::cout << "type: " << type << std::endl;
-    std::cout << "vid: " << frameBody->getVID() << std::endl;
 
     /* construct ethernet header */
     struct ethhdr eth_hdr;
     memset(&eth_hdr, 0x00, sizeof(eth_hdr));
     unsigned char dest[ETH_ALEN] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x01};
-    memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);                           // set dest mac
-    memcpy(&eth_hdr.h_source, this->m_sockAddrII.sll_addr, ETH_ALEN);  // set src mac
-    eth_hdr.h_proto = htons(ETH_P_ALL);                                // set IEEE 802.1Q protocol
+    memcpy(&eth_hdr.h_dest, frameBody->getDstMAC(), ETH_ALEN);         // set dest mac
+    // memcpy(&eth_hdr.h_source, this->m_sockAddrII.sll_addr, ETH_ALEN);  // set src mac
+    memcpy(&eth_hdr.h_source, frameBody->getSrcMAC(), ETH_ALEN);       // set src mac
+    memcpy(&eth_hdr.h_proto, frameBody->getProto(), ETH_ALEN);         // set protocol
     INFO("dest mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_dest), 6));
     INFO("src mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_source), 6));
     INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_proto), 2));
@@ -54,14 +48,14 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     __be16 tci = VlanTCI::encode(vlan_tci);
     struct vlan_hdr vlan_tag;
     memset(&vlan_tag, 0x00, sizeof(vlan_tag));
-    memcpy(&vlan_tag.h_vlan_TCI, &tci, sizeof(tci));        // set TCI
-    vlan_tag.h_vlan_encapsulated_proto = htons(ETH_P_ALL);  // set IEEE 1722 protocol
+    memcpy(&vlan_tag.h_vlan_TCI, &tci, sizeof(tci));                                  // set TCI
+    memcpy(&vlan_tag.h_vlan_encapsulated_proto, frameBody->getVlanProto(), ETH_ALEN); // set protocol
 
     /* construct R-tag */
     struct rtag_hdr rtag;
     __be16 seq = frameBody->getSeq();
     memset(&rtag, 0x00, sizeof(rtag));
-    rtag.h_rtag_seq_num = htons(seq);  // set
+    rtag.h_rtag_seq_num = htons(seq);  
     rtag.h_rtag_encapsulated_proto = htons(ETH_P_IP);
 
     /* construct TSN frame */
