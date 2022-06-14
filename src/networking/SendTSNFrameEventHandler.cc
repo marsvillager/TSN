@@ -34,8 +34,7 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     memset(&eth_hdr, 0x00, sizeof(eth_hdr));
     unsigned char dest[ETH_ALEN] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x01};
     memcpy(&eth_hdr.h_dest, frameBody->getDstMAC(), ETH_ALEN);         // set dest mac
-    // memcpy(&eth_hdr.h_source, this->m_sockAddrII.sll_addr, ETH_ALEN);  // set src mac
-    memcpy(&eth_hdr.h_source, frameBody->getSrcMAC(), ETH_ALEN);       // set src mac
+    memcpy(&eth_hdr.h_source, this->m_sockAddrII.sll_addr, ETH_ALEN);  // set src mac
     memcpy(&eth_hdr.h_proto, frameBody->getProto(), ETH_ALEN);         // set protocol
     INFO("dest mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_dest), 6));
     INFO("src mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_source), 6));

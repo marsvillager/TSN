@@ -18,10 +18,9 @@ class TSNFrameBody : public IFrameBody {
     unsigned int m_bytes;                 /* no. of bytes */
     unsigned char m_data[ETH_DATA_LEN];   /* data */
     unsigned char m_dst[ETH_ALEN];        /* dst mac */
-    unsigned char m_src[ETH_ALEN];        /* src mac */
     unsigned char m_proto[ETH_TLEN];      /* proto */
     unsigned char m_vlan_proto[ETH_TLEN]; /* vlan proto */
-    unsigned char m_rtag[ETH_ALEN]; /* vlan proto */
+    unsigned char m_rtag[ETH_ALEN];       /* vlan proto */
 
   public:
     TSNFrameBody() = default;
@@ -42,7 +41,6 @@ class TSNFrameBody : public IFrameBody {
 
     void setFrame(unsigned char* frame) {
         memcpy(this->m_dst, frame, 6);
-        memcpy(this->m_src, frame + 6, 6);
         memcpy(this->m_proto, frame + 12, 2);
         memcpy(this->m_vlan_proto, frame + 16, 2);
         memcpy(this->m_rtag, frame + 18, 6);
@@ -69,10 +67,6 @@ class TSNFrameBody : public IFrameBody {
 
     unsigned char* getDstMAC() {
         return this->m_dst;
-    }
-
-    unsigned char* getSrcMAC() {
-        return this->m_src;
     }
 
     unsigned char* getProto() {
