@@ -26,9 +26,8 @@ void RecvTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
 
     // filter
     // unsigned short proto = htons(ETH_P_8021Q);
-    unsigned short proto = htons(0x0081);
-    // INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>((recvbuf + 12)), 2));
-    INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(recvbuf), 36));
+    unsigned short proto = htons(0x6666);
+    INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>((recvbuf + 12)), 2));
     if (memcmp(recvbuf + 12, reinterpret_cast<unsigned char*>(&proto), 2) != 0) {
         INFO("------------- Non-TSN frame --------------\n");
         return;

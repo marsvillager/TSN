@@ -96,8 +96,11 @@ int main (int argc, char **argv)
     memcpy (ether_frame, dst_mac, 6);
     memcpy (ether_frame + 6, src_mac, 6);
 
-    ether_frame[12] = ETH_P_DEAN / 256;
-    ether_frame[13] = ETH_P_DEAN % 256;
+    // ether_frame[12] = ETH_P_DEAN / 256;
+    // ether_frame[13] = ETH_P_DEAN % 256;
+
+    ether_frame[12] = 0x66;
+    ether_frame[13] = 0x66;
 
     // TCI
     ether_frame[14] = 0x00;
