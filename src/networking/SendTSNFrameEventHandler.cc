@@ -32,7 +32,6 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     /* construct ethernet header */
     struct ethhdr eth_hdr;
     memset(&eth_hdr, 0x00, sizeof(eth_hdr));
-    unsigned char dest[ETH_ALEN] = {0x01, 0x00, 0x5E, 0x00, 0x00, 0x01};
     memcpy(&eth_hdr.h_dest, frameBody->getDstMAC(), ETH_ALEN);         // set dest mac
     memcpy(&eth_hdr.h_source, this->m_sockAddrII.sll_addr, ETH_ALEN);  // set src mac
     memcpy(&eth_hdr.h_proto, frameBody->getProto(), ETH_ALEN);         // set protocol
@@ -59,14 +58,12 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
 
     /* construct TSN frame */
     union tsn_frame frame;
-    const char* data = "hello world\n";
-    unsigned int data_len = strlen(data);
-    unsigned int frame_len = data_len + ETH_HLEN + 4 + 6;
+    unsigned int frame_len = frameBody->getBytes() + ETH_HLEN + 4 + 6;
     memset(&frame, 0x00, sizeof(tsn_frame));
     memcpy(&frame.filed.header.eth_hdr, &eth_hdr, sizeof(eth_hdr));
     memcpy(&frame.filed.header.vlan_tag, &vlan_tag, sizeof(vlan_tag));
     memcpy(&frame.filed.header.r_tag, &rtag, sizeof(rtag));
-    memcpy(frame.filed.data, data, strlen(data));
+    memcpy(frame.filed.data, frameBody->getData(), frameBody->getBytes());
 
     /* get interface index */
     int ifindex = LinkLayerInterface::getIndex("lo");

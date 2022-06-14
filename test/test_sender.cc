@@ -39,7 +39,7 @@ static void TestSend() {
     unsigned char mac[8];
     LinkLayerInterface::getMacAddress(deviceName)->getRaw(mac);
 
-    int frameNum = 500;
+    int frameNum = 400;
     // __be16 TCI[8] = {
     __be16 TCI[4] = {
         htons(0x0001),  // 0：0000 0000 0000 0001
@@ -58,6 +58,7 @@ static void TestSend() {
         memset(&eth_hdr, 0x00, sizeof(eth_hdr));
         unsigned char dest[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
         // unsigned char dest[ETH_ALEN] = {0x00, 0x0C, 0x29, 0xED, 0x5A, 0xAD};
+        // unsigned char dest[ETH_ALEN] = {0x64, 0x6E, 0x97, 0xC7, 0x88, 0x65};
         memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);   // set dest mac
         memcpy(&eth_hdr.h_source, mac, ETH_ALEN);  // set src mac
         // don't set ETH_P_8021Q, it will ceause receiver to discard vlan tag
