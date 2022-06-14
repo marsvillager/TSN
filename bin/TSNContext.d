@@ -262,6 +262,7 @@ bin/TSNContext.o: src/core/TSNContext.cc /usr/include/stdc-predef.h \
  /usr/include/c++/9/bits/deque.tcc \
  src/core/./port/../../networking/../core/queue/../../networking/frame/EnhancementTSNFrameBody.h \
  src/core/./port/../../networking/../core/queue/../../networking/frame/TSNFrameBody.h \
+ src/core/./port/../../networking/../core/queue/../../networking/frame/../../utils/ConvertUtils.h \
  src/core/./port/../../networking/../core/queue/../../networking/frame/../../utils/log/Log.h \
  src/core/./port/../../networking/../core/queue/../../networking/frame/if_ether.h \
  src/core/./port/../../networking/../core/queue/../../networking/frame/IFrameBody.h \

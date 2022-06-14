@@ -142,6 +142,7 @@ bin/QueueContext.o: src/core/queue/QueueContext.cc \
  src/core/queue/../../networking/frame/EnhancementTSNFrameBody.h \
  src/core/queue/../../networking/frame/TSNFrameBody.h \
  /usr/include/memory.h /usr/include/string.h /usr/include/strings.h \
+ src/core/queue/../../networking/frame/../../utils/ConvertUtils.h \
  src/core/queue/../../networking/frame/../../utils/log/Log.h \
  src/core/queue/../../networking/frame/../../utils/log/DebugLogger.h \
  src/core/queue/../../networking/frame/../../utils/log/InfoLogger.h \

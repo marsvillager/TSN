@@ -215,6 +215,7 @@ bin/RecvTSNFrameEventHandler.o: \
  /usr/include/c++/9/bits/stl_deque.h /usr/include/c++/9/bits/deque.tcc \
  src/networking/../core/queue/../../networking/frame/EnhancementTSNFrameBody.h \
  src/networking/../core/queue/../../networking/frame/TSNFrameBody.h \
+ src/networking/../core/queue/../../networking/frame/../../utils/ConvertUtils.h \
  src/networking/../core/queue/../../networking/frame/../../utils/log/Log.h \
  src/networking/../core/queue/../../networking/frame/if_ether.h \
  src/networking/../core/queue/../../networking/frame/IFrameBody.h \

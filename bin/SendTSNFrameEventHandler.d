@@ -152,6 +152,7 @@ bin/SendTSNFrameEventHandler.o: \
  src/networking/../core/queue/../../networking/frame/EnhancementTSNFrameBody.h \
  src/networking/../core/queue/../../networking/frame/TSNFrameBody.h \
  /usr/include/memory.h /usr/include/string.h /usr/include/strings.h \
+ src/networking/../core/queue/../../networking/frame/../../utils/ConvertUtils.h \
  src/networking/../core/queue/../../networking/frame/../../utils/log/Log.h \
  src/networking/../core/queue/../../networking/frame/../../utils/log/DebugLogger.h \
  src/networking/../core/queue/../../networking/frame/../../utils/log/InfoLogger.h \
