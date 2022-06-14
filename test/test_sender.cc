@@ -57,31 +57,21 @@ static void TestSend() {
         struct ethhdr eth_hdr;
         memset(&eth_hdr, 0x00, sizeof(eth_hdr));
         unsigned char dest[ETH_ALEN] = {0x11, 0x00, 0x5E, 0x00, 0x00, 0x01};
+        // unsigned char dest[ETH_ALEN] = {0x00, 0x0C, 0x29, 0xED, 0x5A, 0xAD};
         memcpy(&eth_hdr.h_dest, dest, ETH_ALEN);   // set dest mac
         memcpy(&eth_hdr.h_source, mac, ETH_ALEN);  // set src mac
         // don't set ETH_P_8021Q, it will ceause receiver to discard vlan tag
-        // eth_hdr.h_proto = htons(ETH_P_ALL);  // set IEEE 802.1Q protocol
-        eth_hdr.h_proto = htons(ETH_P_8021Q);  // set IEEE 802.1Q protocol
+        eth_hdr.h_proto = htons(0x6666);  // set IEEE 802.1Q protocol
         INFO("dest mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_dest), 6));
         INFO("src mac = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_source), 6));
         INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&eth_hdr.h_proto), 2) + "\n");
-
-        /* construct VLAN-tag */
-        // struct vlan_tci tci = 0x1001;
-        // memset(&tci, 0x00, sizeof(tci));
-        // tci.pcp = 7;
-        // tci.vid = 1;
-        // INFO("pcp = " + to_string(tci.pcp));
-        // INFO("dei = " + to_string(tci.dei));
-        // INFO("vid = " + to_string(tci.vid));
 
         // __be16 tci = TCI[i % 8]; // 一轮优先级测试
         __be16 tci = TCI[i % 4];  // 一轮优先级测试
         struct vlan_hdr vlan_tag;
         memset(&vlan_tag, 0x00, sizeof(vlan_tag));
         memcpy(&vlan_tag.h_vlan_TCI, &tci, sizeof(tci));        // set TCI
-        // vlan_tag.h_vlan_encapsulated_proto = htons(ETH_P_ALL);
-        vlan_tag.h_vlan_encapsulated_proto = htons(0x0002);  
+        vlan_tag.h_vlan_encapsulated_proto = htons(ETH_P_ALL);
         // INFO("TCI = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&vlan_tag.h_vlan_TCI), 2));
         // INFO("protocol = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&vlan_tag.h_vlan_encapsulated_proto), 2) + "\n");
 
@@ -99,7 +89,6 @@ static void TestSend() {
         const char* data = "hello world\n";
         unsigned int frame_len = strlen(data) + ETH_HLEN + 4 + 6;
         memset(&frame, 0x00, sizeof(tsn_frame));
-        // INFO("TSN frame length = " + to_string(sizeof(frame)));
         memcpy(&frame.filed.header.eth_hdr, &eth_hdr, sizeof(eth_hdr));
         memcpy(&frame.filed.header.vlan_tag, &vlan_tag, sizeof(vlan_tag));
         memcpy(&frame.filed.header.r_tag, &rtag, sizeof(rtag));
