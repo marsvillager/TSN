@@ -9,7 +9,7 @@ void Test_State_Pattern() {
     // 定义
     TSNContext& context = TSNContext::getInstance();
     shared_ptr<ITSNContextState> initState = make_shared<InitTSNContextState>();
-    std:shared_ptr<ITSNContextState> runState = make_shared<RunTSNContextState>();
+    shared_ptr<ITSNContextState> runState = make_shared<RunTSNContextState>();
 
     initState->doAction(context);
     runState->doAction(context);
