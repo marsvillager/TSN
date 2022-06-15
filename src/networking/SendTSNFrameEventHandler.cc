@@ -65,8 +65,11 @@ void SendTSNFrameEventHandler::handle_event(EVENT_TYPE eventType) {
     memcpy(&frame.filed.header.r_tag, &rtag, sizeof(rtag));
     memcpy(frame.filed.data, frameBody->getData(), frameBody->getBytes());
 
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    const char* deviceName = cs.get<const char*>("sendDevice");
     /* get interface index */
-    int ifindex = LinkLayerInterface::getIndex("lo");
+    int ifindex = LinkLayerInterface::getIndex(deviceName);
 
     this->m_sockAddrII.sll_family = PF_PACKET;           // set address family
     this->m_sockAddrII.sll_ifindex = ifindex;            // set interface index
