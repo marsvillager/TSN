@@ -15,7 +15,13 @@ void InitTSNContextState::doAction(TSNContext& context) {
     context.setState(prt);
     INFO("START STATE");
 
-    // TODO initilize TSN Context
+    ConfigSetting& cs = ConfigSetting::getInstance();
+    /* load config file */
+    context.setDeviceName(cs.get<const char*>("deviceName"));
+
+    /* load config file */
+    string filename = cs.get<string>("routesDir");
+    MacTable::loadRouteXML(filename);
 }
 
 }  // namespace faker_tsn
