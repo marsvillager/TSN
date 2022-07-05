@@ -39,19 +39,24 @@ static void TestSend() {
     unsigned char mac[8];
     LinkLayerInterface::getMacAddress(deviceName)->getRaw(mac);
 
-    int frameNum = 1000, priNum = 4;
+    int frameNum = 400, priNum = 7;
     int pri0 = 0, pri4 = 0, pri7 = 0;
     __be16 TCI[priNum] = {
         htons(0x0001),  // 0：0000 0000 0000 0001
+        htons(0x0001),  // 0：1000 0000 0000 0001
+        htons(0x0001),  // 0：1000 0000 0000 0001
         // htons(0x2001),    // 1：0010 0000 0000 0001
         // htons(0x4001),    // 2：0100 0000 0000 0001
         // htons(0x6001),    // 3：0011 0000 0000 0001
         htons(0x8001),  // 4：1000 0000 0000 0001
-        htons(0xA001),  // 5：1010 0000 0000 0001
+        htons(0x8001),  // 4：1000 0000 0000 0001
+        htons(0x8001),  // 4：1000 0000 0000 0001
+        // htons(0xA001),  // 5：1010 0000 0000 0001
         // htons(0xC001),    // 6：1100 0000 0000 0001
         htons(0xE001)  // 7：1110 0000 0000 0001
     };
     for (int i = 0; i < frameNum; i++) {
+        if((i % 23) == 0) continue;
         // INFO("\n\nEncode frame");
         /* construct ethernet header */
         struct ethhdr eth_hdr;
@@ -79,7 +84,20 @@ static void TestSend() {
         /* construct R-tag */
         struct rtag_hdr rtag;
         memset(&rtag, 0x00, sizeof(rtag));
-        rtag.h_rtag_seq_num = htons(i);
+        if (i % priNum == 6) {
+            pri7++;
+            INFO("pri7 = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&pri7), 1));
+            cout << "pri7 = " + htons(pri7) << endl;
+            rtag.h_rtag_seq_num = htons(pri7);
+        } else if (i % priNum == 3 || i % priNum == 4 || i % priNum == 5) {
+            pri4++;        
+            INFO("pri4 = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&pri4), 1));
+            rtag.h_rtag_seq_num = htons(pri4);
+        } else {
+            pri0++; 
+            INFO("pri0 = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&pri0), 1));
+            rtag.h_rtag_seq_num = htons(pri0);
+        }
         rtag.h_rtag_encapsulated_proto = htons(ETH_P_IP);
         // INFO("reserved = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&rtag.h_rtag_rsved), 2));
         // INFO("sequence number = " + ConvertUtils::converBinToHexString(reinterpret_cast<unsigned char*>(&rtag.h_rtag_seq_num), 2));
