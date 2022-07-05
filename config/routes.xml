@@ -11,6 +11,17 @@
       </forward>
     </static>
   </filteringDatabase>
+  <filteringDatabase id="eth0">
+    <static>
+      <forward>
+        <individualAddress port="0" macAddress="00-0c-29-ad-5c-75"/>
+        <individualAddress port="1" macAddress="00-0c-29-ed-5a-ad"/>
+        <individualAddress port="1" macAddress="48-5b-39-aa-28-86"/>
+        <individualAddress port="0" macAddress="64-6e-97-c7-88-65"/>
+        <individualAddress port="1" macAddress="b4-b5-b6-e9-b8-85"/>
+      </forward>
+    </static>
+  </filteringDatabase>
   <filteringDatabase id="enp2s0">
     <static>
       <forward>
@@ -23,6 +34,17 @@
     </static>
   </filteringDatabase>
   <filteringDatabase id="wlx646e97c78865">
+    <static>
+      <forward>
+        <individualAddress port="0" macAddress="00-0c-29-ad-5c-75"/>
+        <individualAddress port="1" macAddress="00-0c-29-ed-5a-ad"/>
+        <individualAddress port="1" macAddress="48-5b-39-aa-28-86"/>
+        <individualAddress port="0" macAddress="64-6e-97-c7-88-65"/>
+        <individualAddress port="1" macAddress="b4-b5-b6-e9-b8-85"/>
+      </forward>
+    </static>
+  </filteringDatabase>
+  <filteringDatabase id="wlan0">
     <static>
       <forward>
         <individualAddress port="0" macAddress="00-0c-29-ad-5c-75"/>
